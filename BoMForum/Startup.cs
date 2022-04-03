@@ -30,6 +30,8 @@ namespace BoMForum
                {
                    options.UseSqlite(Configuration["ConnectionStrings:ForumConnection"]);
                });
+
+            services.AddScoped<IForumRepository, EFForumRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

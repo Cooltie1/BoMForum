@@ -10,16 +10,16 @@ namespace BoMForum.Models
     {
         public UserPost()
         {
-            this.Tags = new HashSet<Tag>();
+            this.UserPostTags = new HashSet<UserPostTag>();
         }
         [Required]
         [Key]
-        public int PostID { get; set; }
+        public int UserPostID { get; set; }
         [Required(ErrorMessage = "This textbox cannot be empty.")]
         public string UserPostText { get; set; }
         [Required(ErrorMessage = "Each post needs a title")]
         public string UserPostTitle { get; set; }
-        public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<UserPostTag> UserPostTags { get; set; }
 
     }
 }

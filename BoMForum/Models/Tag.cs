@@ -10,13 +10,13 @@ namespace BoMForum.Models
     {
         public Tag()
         {
-            this.UserPosts = new HashSet<UserPost>();
+            this.UserPostTags = new HashSet<UserPostTag>();
         }
         [Key]
         [Required]
         public int TagID { get; set; }
         [Required]
         public string TagText { get; set; }
-        public HashSet<UserPost> UserPosts { get; set; }
+        public HashSet<UserPostTag> UserPostTags { get; set; }
     }
 }

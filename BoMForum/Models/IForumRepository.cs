@@ -10,6 +10,7 @@ namespace BoMForum.Models
         public IQueryable<Comment> Comments { get; }
         public IQueryable<Tag> Tags { get; }
         public IQueryable<UserPost> UserPosts { get; }
+        public IQueryable<UserPostTag> UserPostTags { get; }
         public void SavePost(UserPost userPost);
         public void SaveComment(Comment comment);
     }

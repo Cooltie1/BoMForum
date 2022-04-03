@@ -11,11 +11,11 @@ namespace BoMForum.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private IForumRepository _repo { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IForumRepository repo)
         {
-            _logger = logger;
+            _repo = repo;
         }
 
         public IActionResult Index()

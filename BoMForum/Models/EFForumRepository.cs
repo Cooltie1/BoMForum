@@ -17,6 +17,7 @@ namespace BoMForum.Models
         public IQueryable<Tag> Tags => _context.Tags;
 
         public IQueryable<UserPost> UserPosts => _context.UserPosts;
+        public IQueryable<UserPostTag> UserPostTags => _context.UserPostTags;
 
         public void SaveComment(Comment comment)
         {
@@ -26,7 +27,7 @@ namespace BoMForum.Models
         public void SavePost(UserPost userPost)
         {
             // Made need to add attach range
-            if (userPost.PostID == 0)
+            if (userPost.UserPostID == 0)
             {
                 _context.UserPosts.Add(userPost);
             }
