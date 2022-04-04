@@ -13,5 +13,6 @@ namespace BoMForum.Models
         public IQueryable<UserPostTag> UserPostTags { get; }
         public void SavePost(UserPost userPost);
         public void SaveComment(Comment comment);
+        public List<UserPost> PostJoin();
     }
 }

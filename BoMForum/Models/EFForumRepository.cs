@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,6 +36,15 @@ namespace BoMForum.Models
                 _context.Update(userPost);
             }
             _context.SaveChanges();
+        }
+
+        public List<UserPost> PostJoin()
+        {
+            return _context.UserPosts
+                .Include(x => x.UserPostTags)
+                .ThenInclude(y => y.Tag)
+                .ToList();
+            
         }
     }
 }

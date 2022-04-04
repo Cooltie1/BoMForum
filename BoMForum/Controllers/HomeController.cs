@@ -22,7 +22,7 @@ namespace BoMForum.Controllers
         {
             ViewBag.tags = _repo.Tags;
             ViewBag.postTag = _repo.UserPostTags;
-            var posts = _repo.UserPosts;
+            var posts = _repo.PostJoin();
             return View(posts);
         }
 
