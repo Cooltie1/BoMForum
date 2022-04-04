@@ -135,8 +135,8 @@ namespace BoMForum.Models
                 new UserPost
                 {
                     UserPostID = 1,
-                    UserPostText = "Example Post",
-                    UserPostTitle = "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum"
+                    UserPostTitle = "Example Post",
+                    UserPostText = "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum"
                 }
 
                 );

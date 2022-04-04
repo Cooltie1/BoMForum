@@ -183,7 +183,7 @@ namespace BoMForum.Migrations
             migrationBuilder.InsertData(
                 table: "UserPosts",
                 columns: new[] { "UserPostID", "UserPostText", "UserPostTitle" },
-                values: new object[] { 1, "Example Post", "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum" });
+                values: new object[] { 1, "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum", "Example Post" });
 
             migrationBuilder.InsertData(
                 table: "UserPostTags",

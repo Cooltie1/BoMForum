@@ -20,7 +20,10 @@ namespace BoMForum.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            ViewBag.tags = _repo.Tags;
+            ViewBag.postTag = _repo.UserPostTags;
+            var posts = _repo.UserPosts;
+            return View(posts);
         }
 
         public IActionResult Privacy()

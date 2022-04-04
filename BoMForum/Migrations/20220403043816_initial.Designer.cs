@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoMForum.Migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    [Migration("20220403040732_initial")]
+    [Migration("20220403043816_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -182,8 +182,8 @@ namespace BoMForum.Migrations
                         new
                         {
                             UserPostID = 1,
-                            UserPostText = "Example Post",
-                            UserPostTitle = "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum"
+                            UserPostText = "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum",
+                            UserPostTitle = "Example Post"
                         });
                 });
 
