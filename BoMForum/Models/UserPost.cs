@@ -8,10 +8,7 @@ namespace BoMForum.Models
 {
     public class UserPost
     {
-        public UserPost()
-        {
-            this.UserPostTags = new HashSet<UserPostTag>();
-        }
+       
         [Required]
         [Key]
         public int UserPostID { get; set; }
@@ -19,7 +16,8 @@ namespace BoMForum.Models
         public string UserPostText { get; set; }
         [Required(ErrorMessage = "Each post needs a title")]
         public string UserPostTitle { get; set; }
-        public virtual ICollection<UserPostTag> UserPostTags { get; set; }
+        public Tag Tag { get; set; }
+        public int TagID { get; set; }
 
     }
 }

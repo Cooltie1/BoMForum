@@ -17,8 +17,8 @@ namespace BoMForum.Models
 
         public IQueryable<Tag> Tags => _context.Tags;
 
-        public IQueryable<UserPost> UserPosts => _context.UserPosts;
-        public IQueryable<UserPostTag> UserPostTags => _context.UserPostTags;
+        public IQueryable<UserPost> UserPosts => _context.UserPosts.Include(x => x.Tag);
+        
 
         public void SaveComment(Comment comment)
         {
@@ -27,6 +27,8 @@ namespace BoMForum.Models
 
         public void SavePost(UserPost userPost)
         {
+
+            _context.AttachRange(_context.Tags.Single(x => x.TagID == userPost.TagID));
             // Made need to add attach range
             if (userPost.UserPostID == 0)
             {
@@ -38,13 +40,5 @@ namespace BoMForum.Models
             _context.SaveChanges();
         }
 
-        public List<UserPost> PostJoin()
-        {
-            return _context.UserPosts
-                .Include(x => x.UserPostTags)
-                .ThenInclude(y => y.Tag)
-                .ToList();
-            
-        }
     }
 }

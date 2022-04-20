@@ -27,11 +27,18 @@ namespace BoMForum.Migrations
                     UserPostID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     UserPostText = table.Column<string>(nullable: false),
-                    UserPostTitle = table.Column<string>(nullable: false)
+                    UserPostTitle = table.Column<string>(nullable: false),
+                    TagID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserPosts", x => x.UserPostID);
+                    table.ForeignKey(
+                        name: "FK_UserPosts_Tags_TagID",
+                        column: x => x.TagID,
+                        principalTable: "Tags",
+                        principalColumn: "TagID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,39 +63,10 @@ namespace BoMForum.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "UserPostTags",
-                columns: table => new
-                {
-                    UserPostID = table.Column<int>(nullable: false),
-                    TagID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserPostTags", x => new { x.UserPostID, x.TagID });
-                    table.ForeignKey(
-                        name: "FK_UserPostTags_UserPosts_TagID",
-                        column: x => x.TagID,
-                        principalTable: "UserPosts",
-                        principalColumn: "UserPostID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserPostTags_Tags_UserPostID",
-                        column: x => x.UserPostID,
-                        principalTable: "Tags",
-                        principalColumn: "TagID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Tags",
                 columns: new[] { "TagID", "TagText" },
                 values: new object[] { 1, "Atonement" });
-
-            migrationBuilder.InsertData(
-                table: "Tags",
-                columns: new[] { "TagID", "TagText" },
-                values: new object[] { 19, "Hardships and Challenges" });
 
             migrationBuilder.InsertData(
                 table: "Tags",
@@ -128,12 +106,12 @@ namespace BoMForum.Migrations
             migrationBuilder.InsertData(
                 table: "Tags",
                 columns: new[] { "TagID", "TagText" },
-                values: new object[] { 20, "The Church" });
+                values: new object[] { 11, "Baptism" });
 
             migrationBuilder.InsertData(
                 table: "Tags",
                 columns: new[] { "TagID", "TagText" },
-                values: new object[] { 11, "Baptism" });
+                values: new object[] { 10, "Repentence" });
 
             migrationBuilder.InsertData(
                 table: "Tags",
@@ -178,17 +156,17 @@ namespace BoMForum.Migrations
             migrationBuilder.InsertData(
                 table: "Tags",
                 columns: new[] { "TagID", "TagText" },
-                values: new object[] { 10, "Repentence" });
+                values: new object[] { 19, "Hardships and Challenges" });
+
+            migrationBuilder.InsertData(
+                table: "Tags",
+                columns: new[] { "TagID", "TagText" },
+                values: new object[] { 20, "The Church" });
 
             migrationBuilder.InsertData(
                 table: "UserPosts",
-                columns: new[] { "UserPostID", "UserPostText", "UserPostTitle" },
-                values: new object[] { 1, "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum", "Example Post" });
-
-            migrationBuilder.InsertData(
-                table: "UserPostTags",
-                columns: new[] { "UserPostID", "TagID" },
-                values: new object[] { 1, 1 });
+                columns: new[] { "UserPostID", "TagID", "UserPostText", "UserPostTitle" },
+                values: new object[] { 1, 1, "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum", "Example Post" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserPostID",
@@ -196,8 +174,8 @@ namespace BoMForum.Migrations
                 column: "UserPostID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserPostTags_TagID",
-                table: "UserPostTags",
+                name: "IX_UserPosts_TagID",
+                table: "UserPosts",
                 column: "TagID");
         }
 
@@ -205,9 +183,6 @@ namespace BoMForum.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Comments");
-
-            migrationBuilder.DropTable(
-                name: "UserPostTags");
 
             migrationBuilder.DropTable(
                 name: "UserPosts");

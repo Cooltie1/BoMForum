@@ -1,4 +1,5 @@
 ﻿using BoMForum.Models;
+using BoMForum.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,8 +22,8 @@ namespace BoMForum.Controllers
         public IActionResult Index()
         {
             ViewBag.tags = _repo.Tags;
-            ViewBag.postTag = _repo.UserPostTags;
-            var posts = _repo.PostJoin();
+
+            var posts = _repo.UserPosts;
             return View(posts);
         }
 
@@ -35,6 +36,14 @@ namespace BoMForum.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpGet]
+        public IActionResult Details(int postid)
+        {
+            UserPost post = _repo.UserPosts.Single(x => x.UserPostID == postid);
+            IQueryable<Comment> comments = _repo.Comments.Where(x => x.UserPostID == postid);
+            DetailsPage detailsPage = new DetailsPage(post, comments);
+            return View(detailsPage);
         }
     }
 }

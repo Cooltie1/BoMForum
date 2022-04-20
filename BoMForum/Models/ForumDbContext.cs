@@ -13,20 +13,10 @@ namespace BoMForum.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<UserPost> UserPosts { get; set; }
-        public DbSet<UserPostTag> UserPostTags { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserPostTag>()
-                .HasKey(x => new { x.UserPostID, x.TagID });
-            modelBuilder.Entity<UserPostTag>()
-                .HasOne(x => x.UserPost)
-                .WithMany(y => y.UserPostTags)
-                .HasForeignKey(y => y.TagID);
-            modelBuilder.Entity<UserPostTag>()
-                .HasOne(x => x.Tag)
-                .WithMany(y => y.UserPostTags)
-                .HasForeignKey(y => y.UserPostID);
 
             modelBuilder.Entity<Tag>().HasData(
                 new Tag
@@ -136,20 +126,12 @@ namespace BoMForum.Models
                 {
                     UserPostID = 1,
                     UserPostTitle = "Example Post",
-                    UserPostText = "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum"
-                }
-
-                );
-            modelBuilder.Entity<UserPostTag>().HasData(
-
-                new UserPostTag
-                {
-                    UserPostID = 1,
+                    UserPostText = "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum",
                     TagID = 1
                 }
 
-
                 );
+
         }
 
 

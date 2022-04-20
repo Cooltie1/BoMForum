@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoMForum.Migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    [Migration("20220403043816_initial")]
+    [Migration("20220420185637_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,6 +166,9 @@ namespace BoMForum.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("TagID")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("UserPostText")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -176,36 +179,17 @@ namespace BoMForum.Migrations
 
                     b.HasKey("UserPostID");
 
+                    b.HasIndex("TagID");
+
                     b.ToTable("UserPosts");
 
                     b.HasData(
                         new
                         {
                             UserPostID = 1,
+                            TagID = 1,
                             UserPostText = "Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum",
                             UserPostTitle = "Example Post"
-                        });
-                });
-
-            modelBuilder.Entity("BoMForum.Models.UserPostTag", b =>
-                {
-                    b.Property<int>("UserPostID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TagID")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("UserPostID", "TagID");
-
-                    b.HasIndex("TagID");
-
-                    b.ToTable("UserPostTags");
-
-                    b.HasData(
-                        new
-                        {
-                            UserPostID = 1,
-                            TagID = 1
                         });
                 });
 
@@ -218,17 +202,11 @@ namespace BoMForum.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BoMForum.Models.UserPostTag", b =>
+            modelBuilder.Entity("BoMForum.Models.UserPost", b =>
                 {
-                    b.HasOne("BoMForum.Models.UserPost", "UserPost")
-                        .WithMany("UserPostTags")
-                        .HasForeignKey("TagID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BoMForum.Models.Tag", "Tag")
-                        .WithMany("UserPostTags")
-                        .HasForeignKey("UserPostID")
+                        .WithMany()
+                        .HasForeignKey("TagID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
