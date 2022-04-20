@@ -34,9 +34,6 @@ namespace BoMForum.Models
             {
                 _context.UserPosts.Add(userPost);
             }
-            {
-                _context.Update(userPost);
-            }
             _context.SaveChanges();
         }
 

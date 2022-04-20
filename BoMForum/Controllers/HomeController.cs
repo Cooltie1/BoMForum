@@ -45,5 +45,25 @@ namespace BoMForum.Controllers
             DetailsPage detailsPage = new DetailsPage(post, comments);
             return View(detailsPage);
         }
+
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.tags = _repo.Tags;
+            return View(new UserPost());
+        }
+
+        [HttpPost]
+        public IActionResult Create(UserPost userPost)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.SavePost(userPost);
+                return RedirectToAction("Index");
+            }
+            ViewBag.tags = _repo.Tags;
+            return View(userPost);
+        }
     }
 }

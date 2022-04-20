@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model UserPost
+<h1>Create a Post</h1>
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <input hidden asp-for="UserPostID" />
+    <div class="form-group">
+        <label asp-for="UserPostTitle">Title</label>
+        <input class="form-control" asp-for="UserPostTitle" />
+    </div>
+    <div class="form-group">
+        <label asp-for="UserPostText">Body</label>
+        <textarea class="form-control" asp-for="UserPostText" rows="5"></textarea>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-5">
+            <label asp-for="Tag">Tag</label>
+            <select class="form-control" asp-for="TagID">
+                <option value="1"></option>
+                @foreach (Tag tag in ViewBag.Tags)
+                {
+                    <option value="@tag.TagID">@tag.TagText</option>
+                }
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+
+</form>
