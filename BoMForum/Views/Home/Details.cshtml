@@ -18,16 +18,12 @@
 <div class="mx-4">
     <p>@Model.UserPost.UserPostText</p>
 </div>
-@*<br />
+<br />
 <h3>Comments</h3>
 
 @foreach (Comment comment in Model.Comments)
 {
-    @comment.CommentText
+<p><span class="badge badge-secondary font-weight-normal">@comment.CommentDate</span> @comment.CommentText</p>
 }
 
-
-<h6>New Comment</h6>
-<form method="post">
-    <input hidden
-</form>*@
+<a class="btn btn-outline-success" asp-controller="Home" asp-action="NewComment" asp-route-postid="@Model.UserPost.UserPostID">New Comment</a>

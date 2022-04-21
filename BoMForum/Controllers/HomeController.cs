@@ -65,5 +65,23 @@ namespace BoMForum.Controllers
             ViewBag.tags = _repo.Tags;
             return View(userPost);
         }
+
+        [HttpGet]
+        public IActionResult NewComment(int postid)
+        {
+            Comment comment = new Comment() { UserPostID = postid };
+            return View(comment);
+        }
+        [HttpPost]
+        public IActionResult NewComment(Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                comment.CommentDate = DateTime.Now;
+                _repo.SaveComment(comment);
+                return RedirectToAction("Details", new { postid = comment.UserPostID});
+            }
+            return View(comment);
+        }
     }
 }

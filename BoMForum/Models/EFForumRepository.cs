@@ -22,7 +22,8 @@ namespace BoMForum.Models
 
         public void SaveComment(Comment comment)
         {
-            throw new NotImplementedException();
+            _context.Comments.Add(comment);
+            _context.SaveChanges();
         }
 
         public void SavePost(UserPost userPost)
